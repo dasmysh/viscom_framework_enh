@@ -23,7 +23,7 @@ namespace viscom::enh {
 
     void EnvironmentMapRenderer::Draw(const CameraHelper& camera, gl::GLuint tex)
     {
-        Draw(camera.GetPosition(), camera.GetViewPerspectiveMatrix(), tex);
+        Draw(camera.GetPosition() + camera.GetUserPosition(), camera.GetViewPerspectiveMatrix(), tex);
     }
 
     void EnvironmentMapRenderer::Draw(const glm::vec3& camPos, const glm::mat4& viewproj, gl::GLuint tex)
