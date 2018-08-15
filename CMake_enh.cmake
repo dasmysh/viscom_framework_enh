@@ -13,6 +13,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/extern/fwenh/extern/glbinding)
 set(VISCOM_DO_PROFILING ON CACHE BOOL "Turn on profiling.")
 
 file(GLOB_RECURSE SHADER_FILES_ENH ${PROJECT_SOURCE_DIR}/extern/fwenh/resources/shader/*.*)
+list(FILTER SHADER_FILES_ENH EXCLUDE REGEX ".*\.gen$")
 file(GLOB_RECURSE SRC_FILES_ENH
     ${PROJECT_SOURCE_DIR}/extern/fwenh/src/enh/*.h
     ${PROJECT_SOURCE_DIR}/extern/fwenh/src/enh/*.cpp
