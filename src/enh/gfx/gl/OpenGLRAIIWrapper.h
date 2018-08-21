@@ -37,7 +37,7 @@ namespace viscom::enh {
         explicit OpenGLRAIIWrapper(typename T::value_type newObj) : obj_(newObj) {}
         OpenGLRAIIWrapper(const OpenGLRAIIWrapper&) = delete;
         OpenGLRAIIWrapper& operator=(const OpenGLRAIIWrapper&) = delete;
-        OpenGLRAIIWrapper(OpenGLRAIIWrapper&& rhs) : obj_(rhs.obj_) { rhs.obj_ = T::null_obj; }
+        OpenGLRAIIWrapper(OpenGLRAIIWrapper&& rhs) noexcept : obj_(rhs.obj_) { rhs.obj_ = T::null_obj; }
         OpenGLRAIIWrapper& operator=(OpenGLRAIIWrapper&& rhs) { this->~OpenGLRAIIWrapper(); obj_ = rhs.obj_; rhs.obj_ = T::null_obj; return *this; }
         ~OpenGLRAIIWrapper() { obj_ = T::Destroy(obj_); }
 
