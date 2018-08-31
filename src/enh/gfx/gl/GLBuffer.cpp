@@ -37,7 +37,7 @@ namespace viscom::enh {
         return *this;
     }
 
-    GLBuffer::GLBuffer(GLBuffer&& rhs) :
+    GLBuffer::GLBuffer(GLBuffer&& rhs) noexcept :
         buffer_{ std::move(rhs.buffer_) },
         bufferSize_{ rhs.bufferSize_ },
         usage_{ rhs.usage_ }
@@ -45,7 +45,7 @@ namespace viscom::enh {
         rhs.bufferSize_ = 0;
     }
 
-    GLBuffer& GLBuffer::operator=(GLBuffer&& rhs)
+    GLBuffer& GLBuffer::operator=(GLBuffer&& rhs) noexcept
     {
         this->~GLBuffer();
         buffer_ = std::move(rhs.buffer_);

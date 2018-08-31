@@ -23,7 +23,7 @@ namespace viscom::enh {
     }
 
     /** Move constructor. */
-    GLVertexAttributeArray::GLVertexAttributeArray(GLVertexAttributeArray&& orig) :
+    GLVertexAttributeArray::GLVertexAttributeArray(GLVertexAttributeArray&& orig) noexcept :
         vao_(std::move(orig.vao_)),
         iBuffer_(orig.iBuffer_),
         vBuffer_(orig.vBuffer_),
@@ -34,7 +34,7 @@ namespace viscom::enh {
     }
 
     /** Move assignment operator. */
-    GLVertexAttributeArray& GLVertexAttributeArray::operator =(GLVertexAttributeArray&& orig)
+    GLVertexAttributeArray& GLVertexAttributeArray::operator =(GLVertexAttributeArray&& orig) noexcept
     {
         if (this != &orig) {
             this->~GLVertexAttributeArray();

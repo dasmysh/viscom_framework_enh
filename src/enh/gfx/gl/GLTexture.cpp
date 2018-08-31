@@ -238,16 +238,16 @@ namespace viscom::enh {
      *  Downloads the textures data to a vector.
      *  @param data the vector to contain the data.
      */
-    void GLTexture::DownloadData(std::vector<uint8_t>& data, size_t offset, size_t size) const
+    void GLTexture::DownloadData(std::vector<uint8_t>& data, std::size_t offset, std::size_t size) const
     {
-        if (size == 0) size = static_cast<std::size_t>(width_ * height_ * depth_ * descriptor_.bytesPP_);
+        if (size == 0) size = static_cast<std::size_t>(width_) * height_ * depth_ * descriptor_.bytesPP_;
         data.resize(size);
         assert(data.size() != 0);
 
         // TODO: create external PBOs for real asynchronous up-/download [8/19/2015 Sebastian Maisch]
         BufferRAII pbo;
         gl::glBindBuffer(gl::GL_PIXEL_PACK_BUFFER, pbo);
-        gl::glBufferData(gl::GL_PIXEL_PACK_BUFFER, width_ * height_ * depth_ * descriptor_.bytesPP_, nullptr, gl::GL_STREAM_READ);
+        gl::glBufferData(gl::GL_PIXEL_PACK_BUFFER, static_cast<std::size_t>(width_) * height_ * depth_ * descriptor_.bytesPP_, nullptr, gl::GL_STREAM_READ);
 
         gl::glBindTexture(id_.textureType, id_.textureId);
         gl::glGetTexImage(id_.textureType, 0, descriptor_.format_, descriptor_.type_, nullptr);
@@ -263,13 +263,13 @@ namespace viscom::enh {
         gl::glBindBuffer(gl::GL_PIXEL_PACK_BUFFER, 0);
     }
 
-    void GLTexture::DownloadData8Bit(std::vector<uint8_t>& data) const
+    void GLTexture::DownloadData8Bit(std::vector<std::uint8_t>& data) const
     {
         DownloadData8Bit(id_.textureId, descriptor_, id_.textureType, glm::uvec3(width_, height_, depth_), data);
     }
 
     void GLTexture::DownloadData8Bit(gl::GLuint texture, const TextureDescriptor& descriptor,
-        gl::GLenum textureType, const glm::uvec3& size, std::vector<uint8_t>& data)
+        gl::GLenum textureType, const glm::uvec3& size, std::vector<std::uint8_t>& data)
     {
         auto comp = 0;
         if (descriptor.format_ == gl::GL_RED) comp = 1;
@@ -281,7 +281,7 @@ namespace viscom::enh {
             return;
         }
 
-        data.resize(static_cast<std::size_t>(size.x * size.y * size.z * comp));
+        data.resize(static_cast<std::size_t>(size.x) * size.y * size.z * comp);
         assert(data.size() != 0);
 
         // TODO: create external PBOs for real asynchronous up-/download [8/19/2015 Sebastian Maisch]
@@ -321,7 +321,7 @@ namespace viscom::enh {
             LOG(WARNING) << "Texture format not supported for saving.";
             return;
         }
-        std::vector<uint8_t> screenData;
+        std::vector<std::uint8_t> screenData;
         DownloadData8Bit(texture, descriptor, gl::GL_TEXTURE_2D, size, screenData);
 
         auto stride = static_cast<int>(size.x * comp);
@@ -330,14 +330,14 @@ namespace viscom::enh {
             auto last = ((i + 1) * stride) - 1;
             std::swap_ranges(screenData.begin() + first, screenData.begin() + last, screenData.end() - last - 1);
         }
-        stbi_write_png(filename.c_str(), size.x, size.y, comp, screenData.data(), stride * static_cast<int>(sizeof(uint8_t)));
+        stbi_write_png(filename.c_str(), size.x, size.y, comp, screenData.data(), stride * static_cast<int>(sizeof(std::uint8_t)));
     }
 
     /**
      *  Uploads data to the texture from a vector.
      *  @param data the vector that contains the data.
      */
-    void GLTexture::UploadData(std::vector<uint8_t>& data) const
+    void GLTexture::UploadData(std::vector<std::uint8_t>& data) const
     {
         assert(data.size() != 0);
 

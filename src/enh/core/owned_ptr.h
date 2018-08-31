@@ -19,8 +19,8 @@ namespace viscom::enh {
         owned_ptr(T* ptr, bool owned) : ptr_{ ptr }, owned_{ owned } {};
         owned_ptr(const owned_ptr& rhs)  = delete;
         owned_ptr& operator=(const owned_ptr&) = delete;
-        owned_ptr(owned_ptr&& rhs) : ptr_(rhs.ptr_), owned_{ rhs.owned_ } { rhs.ptr_ = nullptr; }
-        owned_ptr& operator=(owned_ptr&& rhs) { ptr_ = rhs.ptr_; owned_ = rhs.owned_; rhs.ptr_ = nullptr; return *this; }
+        owned_ptr(owned_ptr&& rhs) noexcept : ptr_(rhs.ptr_), owned_{ rhs.owned_ } { rhs.ptr_ = nullptr; }
+        owned_ptr& operator=(owned_ptr&& rhs) noexcept { ptr_ = rhs.ptr_; owned_ = rhs.owned_; rhs.ptr_ = nullptr; return *this; }
         ~owned_ptr() { if (owned_) delete ptr_; }
 
         operator T*() const { return ptr_; }

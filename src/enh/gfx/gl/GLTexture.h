@@ -70,10 +70,10 @@ namespace viscom::enh {
         void ActivateImage(gl::GLuint imageUnitIndex, gl::GLint mipLevel, gl::GLenum accessType) const;
         void AddTextureToArray(const std::string& file, unsigned int slice) const;
         void SetData(const void* data) const;
-        void DownloadData(std::vector<uint8_t>& data, size_t offset = 0, size_t size = 0) const;
-        void DownloadData8Bit(std::vector<uint8_t>& data) const;
+        void DownloadData(std::vector<std::uint8_t>& data, std::size_t offset = 0, std::size_t size = 0) const;
+        void DownloadData8Bit(std::vector<std::uint8_t>& data) const;
         void SaveTextureToFile(const std::string& filename) const;
-        void UploadData(std::vector<uint8_t>& data) const;
+        void UploadData(std::vector<std::uint8_t>& data) const;
         void GenerateMipMaps() const;
         void ClearTexture(unsigned int mipLevel, const glm::vec4& data) const;
         glm::uvec3 GetDimensions() const { return glm::uvec3(width_, height_, depth_); }
@@ -81,7 +81,7 @@ namespace viscom::enh {
         const TextureDescriptor& GetDescriptor() const { return descriptor_; }
 
         static void DownloadData8Bit(gl::GLuint texture, const TextureDescriptor& descriptor,
-            gl::GLenum textureType, const glm::uvec3& size, std::vector<uint8_t>& data);
+            gl::GLenum textureType, const glm::uvec3& size, std::vector<std::uint8_t>& data);
         static void SaveTextureToFile(gl::GLuint texture, const TextureDescriptor& descriptor,
             const glm::uvec3& size, const std::string& filename);
 

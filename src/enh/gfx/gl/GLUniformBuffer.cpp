@@ -65,7 +65,7 @@ namespace viscom::enh {
     /**
      *  Move constructor.
      */
-    GLUniformBuffer::GLUniformBuffer(GLUniformBuffer&& rhs) :
+    GLUniformBuffer::GLUniformBuffer(GLUniformBuffer&& rhs) noexcept :
         buffer_(std::move(rhs.buffer_)),
         bindingPoints_(std::move(rhs.bindingPoints_)),
         bindingPoint_(std::move(rhs.bindingPoint_)),
@@ -76,7 +76,7 @@ namespace viscom::enh {
     /**
      *  Move assignment operator.
      */
-    GLUniformBuffer& GLUniformBuffer::operator=(GLUniformBuffer&& rhs)
+    GLUniformBuffer& GLUniformBuffer::operator=(GLUniformBuffer&& rhs) noexcept
     {
         if (this != &rhs) {
             this->~GLUniformBuffer();

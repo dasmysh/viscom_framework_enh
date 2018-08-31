@@ -30,8 +30,8 @@ namespace viscom::enh {
         GLUniformBuffer(const std::string& name, std::size_t size, ShaderBufferBindingPoints* bindings);
         GLUniformBuffer(const GLUniformBuffer&);
         GLUniformBuffer& operator=(const GLUniformBuffer&);
-        GLUniformBuffer(GLUniformBuffer&&);
-        GLUniformBuffer& operator=(GLUniformBuffer&&);
+        GLUniformBuffer(GLUniformBuffer&&) noexcept;
+        GLUniformBuffer& operator=(GLUniformBuffer&&) noexcept;
         ~GLUniformBuffer();
 
         GLBuffer* GetBuffer() { return buffer_; }

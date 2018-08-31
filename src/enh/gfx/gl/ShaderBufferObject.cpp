@@ -55,14 +55,14 @@ namespace viscom::enh {
         return *this;
     }
 
-    ShaderBufferObject::ShaderBufferObject(ShaderBufferObject&& rhs) :
+    ShaderBufferObject::ShaderBufferObject(ShaderBufferObject&& rhs) noexcept :
         buffer_(std::move(rhs.buffer_)),
         bindingPoints_(std::move(rhs.bindingPoints_)),
         bindingPoint_(std::move(rhs.bindingPoint_))
     {
     }
 
-    ShaderBufferObject& ShaderBufferObject::operator=(ShaderBufferObject&& rhs)
+    ShaderBufferObject& ShaderBufferObject::operator=(ShaderBufferObject&& rhs) noexcept
     {
         this->~ShaderBufferObject();
         buffer_ = std::move(rhs.buffer_);

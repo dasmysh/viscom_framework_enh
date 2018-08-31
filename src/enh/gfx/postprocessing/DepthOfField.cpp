@@ -17,10 +17,10 @@ namespace viscom::enh {
 
     namespace dof {
         struct DoFPassParams {
-            GLuint colorTex_;
-            GLuint depthTex_;
-            const FrameBuffer* fullResRT_;
-            const FrameBuffer* lowResRT_;
+            GLuint colorTex_ = 0;
+            GLuint depthTex_ = 1;
+            const FrameBuffer* fullResRT_ = nullptr;
+            const FrameBuffer* lowResRT_ = nullptr;
             glm::vec2 projParams_;
             glm::vec2 cocParams_;
         };

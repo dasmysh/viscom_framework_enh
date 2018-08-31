@@ -29,19 +29,19 @@ namespace viscom::enh {
     struct vertex_attribute_desc
     {
         /** Holds the attribute type inside the shader. */
-        VAShaderType shaderType_;
+        VAShaderType shaderType_ = VAShaderType::FLOAT;
         /** Holds the attribute binding location. */
-        gl::GLint location_;
+        gl::GLint location_ = 0;
         /** Holds the number of components in the attribute. */
-        int size_;
+        int size_ = 0;
         /** Holds the attributes type in the vertex buffer. */
-        gl::GLenum type_;
+        gl::GLenum type_ = gl::GL_FLOAT;
         /** Holds whether the attribute should be normalized. */
-        gl::GLboolean normalized_;
+        gl::GLboolean normalized_ = false;
         /** The distance between 2 attributes of this type in bytes. */
-        int stride_;
+        int stride_ = 0;
         /** The offset into the vertex to the beginning of this attribute in bytes. */
-        unsigned int offset_;
+        unsigned int offset_ = 0;
     };
 
     /**
@@ -56,8 +56,8 @@ namespace viscom::enh {
         GLVertexAttributeArray(gl::GLuint vertexBuffer, gl::GLuint indexBuffer);
         GLVertexAttributeArray(const GLVertexAttributeArray&) = delete;
         GLVertexAttributeArray& operator=(const GLVertexAttributeArray&) = delete;
-        GLVertexAttributeArray(GLVertexAttributeArray&& orig);
-        GLVertexAttributeArray& operator=(GLVertexAttributeArray&& orig);
+        GLVertexAttributeArray(GLVertexAttributeArray&& orig) noexcept;
+        GLVertexAttributeArray& operator=(GLVertexAttributeArray&& orig) noexcept;
         ~GLVertexAttributeArray();
 
         void StartAttributeSetup() const;

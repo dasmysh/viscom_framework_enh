@@ -19,8 +19,8 @@ namespace viscom::enh {
         OpenGLRAIIWrapper() { T::Create<N>(objs_); }
         OpenGLRAIIWrapper(const OpenGLRAIIWrapper&) = delete;
         OpenGLRAIIWrapper& operator=(const OpenGLRAIIWrapper&) = delete;
-        OpenGLRAIIWrapper(OpenGLRAIIWrapper&& rhs) : objs_(std::move(rhs.objs_)) { for (auto& obj : rhs.objs_) obj = T::null_obj; }
-        OpenGLRAIIWrapper& operator=(OpenGLRAIIWrapper&& rhs) { objs_ = std::move(rhs.objs_); for (auto& obj : rhs.objs_) obj = T::null_obj; return *this; }
+        OpenGLRAIIWrapper(OpenGLRAIIWrapper&& rhs) noexcept : objs_(std::move(rhs.objs_)) { for (auto& obj : rhs.objs_) obj = T::null_obj; }
+        OpenGLRAIIWrapper& operator=(OpenGLRAIIWrapper&& rhs) noexcept { objs_ = std::move(rhs.objs_); for (auto& obj : rhs.objs_) obj = T::null_obj; return *this; }
         ~OpenGLRAIIWrapper() { T::Destroy<N>(objs_); }
 
         typename T::value_type operator[](size_t i) const { return objs_[i]; }
@@ -38,7 +38,7 @@ namespace viscom::enh {
         OpenGLRAIIWrapper(const OpenGLRAIIWrapper&) = delete;
         OpenGLRAIIWrapper& operator=(const OpenGLRAIIWrapper&) = delete;
         OpenGLRAIIWrapper(OpenGLRAIIWrapper&& rhs) noexcept : obj_(rhs.obj_) { rhs.obj_ = T::null_obj; }
-        OpenGLRAIIWrapper& operator=(OpenGLRAIIWrapper&& rhs) { this->~OpenGLRAIIWrapper(); obj_ = rhs.obj_; rhs.obj_ = T::null_obj; return *this; }
+        OpenGLRAIIWrapper& operator=(OpenGLRAIIWrapper&& rhs) noexcept { this->~OpenGLRAIIWrapper(); obj_ = rhs.obj_; rhs.obj_ = T::null_obj; return *this; }
         ~OpenGLRAIIWrapper() { obj_ = T::Destroy(obj_); }
 
         operator typename T::value_type() const { return obj_; }

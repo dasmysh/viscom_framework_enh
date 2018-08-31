@@ -29,8 +29,8 @@ namespace viscom::enh {
         // ShaderBufferObject(const std::string& name, unsigned int size, ShaderBufferBindingPoints* bindings, bool cpuAccess = false);
         ShaderBufferObject(const ShaderBufferObject&);
         ShaderBufferObject& operator=(const ShaderBufferObject&);
-        ShaderBufferObject(ShaderBufferObject&&);
-        ShaderBufferObject& operator=(ShaderBufferObject&&);
+        ShaderBufferObject(ShaderBufferObject&&) noexcept;
+        ShaderBufferObject& operator=(ShaderBufferObject&&) noexcept;
         ~ShaderBufferObject();
 
         GLBuffer* GetBuffer() { return buffer_; }

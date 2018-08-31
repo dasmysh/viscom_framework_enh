@@ -21,8 +21,8 @@ namespace viscom::enh {
         ~GLBuffer();
         GLBuffer(const GLBuffer&);
         GLBuffer& operator=(const GLBuffer&);
-        GLBuffer(GLBuffer&&);
-        GLBuffer& operator=(GLBuffer&&);
+        GLBuffer(GLBuffer&&) noexcept;
+        GLBuffer& operator=(GLBuffer&&) noexcept;
 
         void InitializeData(std::size_t size, const void* data);
         void UploadData(std::size_t offset, std::size_t size, const void* data);
@@ -39,9 +39,9 @@ namespace viscom::enh {
         /** Holds the buffer object name. */
         BufferRAII buffer_;
         /** Holds the current size of the buffer in bytes. */
-        std::size_t bufferSize_;
+        std::size_t bufferSize_ = 0;
         /** Holds the buffer usage. */
-        gl::GLenum usage_;
+        gl::GLenum usage_ = gl::GL_STATIC_DRAW;
     };
 
     template <class T> std::enable_if_t<has_contiguous_memory<T>::value> GLBuffer::InitializeData(const T& data)
