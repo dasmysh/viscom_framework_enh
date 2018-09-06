@@ -82,7 +82,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type buffer) { gl::glDeleteBuffers(1, &buffer); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& buffers)
         {
-            OGL_CALL(gl::glDeleteBuffers, static_cast<gl::GLsizei>(N), buffers.data());
+            gl::glDeleteBuffers(static_cast<gl::GLsizei>(N), buffers.data());
             for (auto& buffer : buffers) buffer = null_obj;
         }
     };
@@ -96,7 +96,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type texture) { gl::glDeleteTextures(1, &texture); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& textures)
         {
-            OGL_CALL(gl::glDeleteTextures, static_cast<gl::GLsizei>(N), textures.data());
+            gl::glDeleteTextures(static_cast<gl::GLsizei>(N), textures.data());
             for (auto& texture : textures) texture = null_obj;
         }
     };
@@ -110,7 +110,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type fbo) { gl::glDeleteFramebuffers(1, &fbo); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& fbos)
         {
-            OGL_CALL(gl::glDeleteFramebuffers, static_cast<gl::GLsizei>(N), fbos.data());
+            gl::glDeleteFramebuffers(static_cast<gl::GLsizei>(N), fbos.data());
             for (auto& fbo : fbos) fbo = null_obj;
         }
     };
@@ -124,7 +124,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type rbo) { gl::glDeleteRenderbuffers(1, &rbo); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& rbos)
         {
-            OGL_CALL(gl::glDeleteRenderbuffers, static_cast<gl::GLsizei>(N), rbos.data());
+            gl::glDeleteRenderbuffers(static_cast<gl::GLsizei>(N), rbos.data());
             for (auto& rbo : rbos) rbo = null_obj;
         }
     };
@@ -138,7 +138,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type vao) { gl::glDeleteVertexArrays(1, &vao); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& vaos)
         {
-            OGL_CALL(gl::glDeleteVertexArrays, static_cast<gl::GLsizei>(N), vaos.data());
+            gl::glDeleteVertexArrays, static_cast<gl::GLsizei>(N), vaos.data();
             for (auto& vao : vaos) vao = null_obj;
         }
     };
