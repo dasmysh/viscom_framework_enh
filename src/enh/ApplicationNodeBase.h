@@ -26,9 +26,6 @@ namespace viscom::enh {
         ApplicationNodeBase& operator=(ApplicationNodeBase&&) = delete;
         virtual ~ApplicationNodeBase() override;
 
-        virtual void InitOpenGL() override;
-        virtual void CleanUp() override;
-
         ShaderBufferBindingPoints* GetUBOBindingPoints() { return &uniformBindingPoints_; }
         ShaderBufferBindingPoints* GetSSBOBindingPoints() { return &shaderStorageBindingPoints_; }
         const SimpleMeshRenderer* GetSimpleMeshes() const { return simpleMeshes_.get(); }

@@ -44,12 +44,6 @@ namespace viscom::enh {
     ApplicationNodeBase::ApplicationNodeBase(ApplicationNodeInternal* appNode) :
         viscom::ApplicationNodeBase{ appNode }
     {
-    }
-
-    ApplicationNodeBase::~ApplicationNodeBase() = default;
-
-    void ApplicationNodeBase::InitOpenGL()
-    {
         {
             using namespace glbinding;
             // Binding::initialize([](const char * name) { return glfwGetProcAddress(name); }, false);
@@ -86,10 +80,6 @@ namespace viscom::enh {
         cubicWeightsTexture_->SampleWrapRepeat();
     }
 
-    void ApplicationNodeBase::CleanUp()
-    {
-        simpleMeshes_ = nullptr;
-        cubicWeightsTexture_ = nullptr;
-    }
+    ApplicationNodeBase::~ApplicationNodeBase() = default;
 
 }
