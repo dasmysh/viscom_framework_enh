@@ -7,6 +7,8 @@
  */
 
 #include "WayPointAnimation.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/spline.hpp"
 #include <imgui.h>
 
