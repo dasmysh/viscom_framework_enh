@@ -71,7 +71,7 @@ namespace viscom::enh {
         gl::glBindTexture(id_.textureType, id_.textureId);
         gl::glTexStorage2D(id_.textureType, mipMapLevels_, descriptor_.internalFormat_, width_, height_);
         if (data) {
-            gl::glTexSubImage2D(id_.textureType, 0, 0, 0, width_, depth_, descriptor_.format_,
+            gl::glTexSubImage2D(id_.textureType, 0, 0, 0, width_, height_, descriptor_.format_,
                 descriptor_.type_, data);
         }
         gl::glBindTexture(id_.textureType, 0);
