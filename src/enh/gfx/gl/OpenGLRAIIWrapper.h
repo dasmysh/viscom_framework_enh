@@ -138,7 +138,7 @@ namespace viscom::enh {
         static value_type Destroy(value_type vao) { gl::glDeleteVertexArrays(1, &vao); return null_obj; }
         template<int N> static void Destroy(std::array<value_type, N>& vaos)
         {
-            gl::glDeleteVertexArrays, static_cast<gl::GLsizei>(N), vaos.data();
+            gl::glDeleteVertexArrays(static_cast<gl::GLsizei>(N), vaos.data());
             for (auto& vao : vaos) vao = null_obj;
         }
     };

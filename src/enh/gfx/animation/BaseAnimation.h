@@ -33,11 +33,12 @@ namespace viscom::enh {
         friend class cereal::access;
 
         template<class Archive>
-        void save(Archive & ar, const std::uint32_t) const {}
+        void save(Archive&, const std::uint32_t) const {}
 
         template<class Archive>
-        void load(Archive & ar, const std::uint32_t)
+        void load(Archive&, const std::uint32_t)
         {
+            // we do not serialize this as it is a running state.
             animationRunning_ = false;
             currentAnimationTime_ = 0.0f;
         }

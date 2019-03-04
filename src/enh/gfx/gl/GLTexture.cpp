@@ -10,8 +10,6 @@
 #include "core/main.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <stb_image.h>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#define STBI_MSC_SECURE_CRT
 #include <stb_image_write.h>
 
 namespace viscom::enh {
@@ -197,7 +195,7 @@ namespace viscom::enh {
             throw std::runtime_error(R"(Could not load texture ")" + file + R"(".)");
         }
 
-        if (width_ != imgWidth || height_ != imgHeight) {
+        if (width_ != static_cast<unsigned int>(imgWidth) || height_ != static_cast<unsigned int>(imgHeight)) {
             LOG(FATAL) << R"(Texture ")" << file.c_str() << R"(" has the wrong format!)";
             stbi_image_free(image);
             throw std::runtime_error(R"(Texture ")" + file + R"(" has the wrong format.)");

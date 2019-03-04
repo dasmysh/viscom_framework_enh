@@ -12,7 +12,7 @@
 
 namespace viscom::enh {
 
-    ShaderBufferObject::ShaderBufferObject(const std::string& name, GLBuffer* buffer, ShaderBufferBindingPoints* bindings, bool cpuAccess) :
+    ShaderBufferObject::ShaderBufferObject(const std::string& name, GLBuffer* buffer, ShaderBufferBindingPoints* bindings, bool) :
         buffer_{ buffer, false },
         bindingPoints_(bindings),
         bindingPoint_(bindingPoints_->GetBindingPoint(name))
@@ -20,10 +20,10 @@ namespace viscom::enh {
     }
 
     /**
-         * Constructor.
-         * @param name the name of the shader buffer object.
-         * @param bindings the binding points used to bind the buffer to
-         */
+     * Constructor.
+     * @param name the name of the shader buffer object.
+     * @param bindings the binding points used to bind the buffer to
+     */
     ShaderBufferObject::ShaderBufferObject(const std::string& name, ShaderBufferBindingPoints* bindings, bool cpuAccess) :
         buffer_{ make_owned<GLBuffer>(cpuAccess ? gl::GL_STREAM_READ : gl::GL_DYNAMIC_DRAW) },
         bindingPoints_(bindings),

@@ -11,6 +11,8 @@
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 #include <glbinding/gl/gl.h>
+#include <memory>
+#include <vector>
 
 namespace viscom {
     class GPUProgram;

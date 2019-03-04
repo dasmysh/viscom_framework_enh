@@ -34,7 +34,7 @@ namespace viscom::enh {
 
     PickHandler::~PickHandler() = default;
 
-    bool PickHandler::HandleMouse(int button, int action, int mods, float mouseWheelDelta, ApplicationNodeBase* sender)
+    bool PickHandler::HandleMouse(int button, int action, int, float, ApplicationNodeBase* sender)
     {
         if (pickMode_ && button == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE && mouseDown_) {
             mouseDown_ = false;
@@ -52,7 +52,7 @@ namespace viscom::enh {
         return false;
     }
 
-    bool PickHandler::HandleKeyboard(int key, int scancode, int action, int mods, ApplicationNodeBase* sender)
+    bool PickHandler::HandleKeyboard(int key, int, int action, int, ApplicationNodeBase*)
     {
         if (key == GLFW_KEY_P && action == GLFW_PRESS) {
             pickMode_ = !pickMode_;

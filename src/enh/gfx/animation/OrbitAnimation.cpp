@@ -61,7 +61,7 @@ namespace viscom::enh {
     {
     }
 
-    bool OrbitAnimationEditor::HandleMouse(int button, int action, int mods, float, ApplicationNodeBase* sender)
+    bool OrbitAnimationEditor::HandleMouse(int button, int action, int, float, ApplicationNodeBase* sender)
     {
         if (edit_ != nullptr) {
             return axisArcball.HandleMouse(button, action, sender);

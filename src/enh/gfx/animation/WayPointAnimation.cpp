@@ -138,7 +138,7 @@ namespace viscom::enh {
 
     // ReSharper disable once CppMemberFunctionMayBeStatic
     // ReSharper disable once CppMemberFunctionMayBeConst
-    bool WaypointAnimationEditor::HandleKeyboard(int key, int, int action, int, ApplicationNodeBase*)
+    bool WaypointAnimationEditor::HandleKeyboard(int, int, int, int, ApplicationNodeBase*)
     {
         return false;
     }

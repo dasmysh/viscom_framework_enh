@@ -111,15 +111,15 @@ namespace viscom::enh {
                 case VAShaderType::FLOAT:
                     gl::glVertexAttribPointer(desc.location_, desc.size_,
                         desc.type_, desc.normalized_, desc.stride_,
-                        (static_cast<char*> (nullptr)) + desc.offset_);
+                        reinterpret_cast<const char*>(static_cast<std::size_t>(desc.offset_)));
                     break;
                 case VAShaderType::INTEGER:
                     gl::glVertexAttribIPointer(desc.location_, desc.size_,
-                        desc.type_, desc.stride_, (static_cast<char*> (nullptr)) + desc.offset_);
+                        desc.type_, desc.stride_, reinterpret_cast<const char*>(static_cast<std::size_t>(desc.offset_)));
                     break;
                 case VAShaderType::DOUBLE:
                     gl::glVertexAttribLPointer(desc.location_, desc.size_,
-                        desc.type_, desc.stride_, (static_cast<char*> (nullptr)) + desc.offset_);
+                        desc.type_, desc.stride_, reinterpret_cast<const char*>(static_cast<std::size_t>(desc.offset_)));
                     break;
                 }
             }
@@ -153,7 +153,7 @@ namespace viscom::enh {
         vDesc_.push_back(std::move(desc));
         gl::glEnableVertexAttribArray(location);
         gl::glVertexAttribPointer(location, size, type, normalized, stride,
-            (static_cast<char*> (nullptr)) + offset);
+            reinterpret_cast<char*>(offset));
     }
 
     /**
@@ -178,7 +178,7 @@ namespace viscom::enh {
         vDesc_.push_back(std::move(desc));
         gl::glEnableVertexAttribArray(location);
         gl::glVertexAttribIPointer(location, size, type, stride,
-            (static_cast<char*> (nullptr)) + offset);
+            reinterpret_cast<char*>(offset));
     }
 
     /**
@@ -203,6 +203,6 @@ namespace viscom::enh {
         vDesc_.push_back(std::move(desc));
         gl::glEnableVertexAttribArray(location);
         gl::glVertexAttribLPointer(location, size, type, stride,
-            (static_cast<char*> (nullptr)) + offset);
+            reinterpret_cast<char*>(offset));
     }
 }

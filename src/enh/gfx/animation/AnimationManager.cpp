@@ -312,7 +312,7 @@ namespace viscom::enh {
         orbAnimations_.SaveAllFromStream(ofs);
     }
 
-    template unsigned int WPAnimationManager::AddLastAnimation(const std::string&);
-    template unsigned int RotationAnimationManager::AddLastAnimation(const std::string&);
-    template unsigned int OrbitAnimationManager::AddLastAnimation(const std::string&);
+    template unsigned int TAnimationManager<WayPointAnimation>::AddLastAnimation(const std::string&);
+    template unsigned int TAnimationManager<RotationAnimation>::AddLastAnimation(const std::string&);
+    template unsigned int TAnimationManager<OrbitAnimation>::AddLastAnimation(const std::string&);
 }

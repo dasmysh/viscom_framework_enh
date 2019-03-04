@@ -150,7 +150,7 @@ namespace viscom::enh {
         if (submeshId == 6) primitiveType = gl::GL_POINTS;
         if (submeshId == 7) primitiveType = gl::GL_LINES;
         glDrawElements(primitiveType, submeshInfo_[submeshId].second, gl::GL_UNSIGNED_INT,
-            (static_cast<char*> (nullptr)) + (submeshInfo_[submeshId].first * sizeof(unsigned int))); //-V104
+            reinterpret_cast<char*>(static_cast<std::size_t>(submeshInfo_[submeshId].first * sizeof(unsigned int)))); //-V104
 
         drawAttribBinds_.GetVertexAttributes()[0]->DisableVertexAttributeArray();
         gl::glUseProgram(0);
