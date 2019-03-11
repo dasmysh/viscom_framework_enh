@@ -8,11 +8,11 @@
 
 #include "ApplicationNodeBase.h"
 
-#include "enh/gfx/mesh/SimpleMeshRenderer.h"
+#include "gfx/mesh/SimpleMeshRenderer.h"
 #include <glbinding/gl/gl.h>
 #include <glbinding/Binding.h>
 #include <glbinding/Meta.h>
-#include "enh/gfx/gl/GLTexture.h"
+#include "gfx/gl/GLTexture.h"
 
 void ecb(const glbinding::FunctionCall & call) {
     std::stringstream callOut;

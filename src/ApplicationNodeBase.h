@@ -9,7 +9,7 @@
 #pragma once
 
 #include "core/app/ApplicationNodeBase.h"
-#include "enh/gfx/gl/ShaderBufferBindingPoints.h"
+#include <gfx/gl/ShaderBufferBindingPoints.h>
 
 namespace viscom::enh {
 

@@ -7,7 +7,7 @@
  */
 
 #include "AnimationManager.h"
-#include "enh/core/gui_helper.h"
+#include "core/gui_helper.h"
 #include <imgui.h>
 #include <fstream>
 #include <cereal/archives/xml.hpp>

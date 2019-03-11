@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "enh/gfx/gl/ShaderMeshAttributes.h"
+#include "gfx/gl/ShaderMeshAttributes.h"
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>

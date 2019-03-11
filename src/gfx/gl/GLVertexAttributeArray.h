@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "enh/main.h"
+#include "gfx/gl/OpenGLRAIIWrapper.h"
 #include <glbinding/gl/gl.h>
 #include <vector>
 

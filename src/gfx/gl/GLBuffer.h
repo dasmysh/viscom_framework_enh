@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include "enh/core/type_traits.h"
-#include "enh/main.h"
+#include "core/type_traits.h"
+#include "gfx/gl/OpenGLRAIIWrapper.h"
 #include <glbinding/gl/gl.h>
 
 namespace viscom::enh {

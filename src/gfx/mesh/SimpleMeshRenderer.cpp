@@ -7,10 +7,10 @@
  */
 
 #include "SimpleMeshRenderer.h"
-#include "core/gfx/mesh/Mesh.h"
-#include "enh/ApplicationNodeBase.h"
-#include "enh/gfx/gl/GLVertexAttributeArray.h"
-#include "enh/gfx/gl/GLBuffer.h"
+#include <core/gfx/mesh/Mesh.h>
+#include "ApplicationNodeBase.h"
+#include "gfx/gl/GLVertexAttributeArray.h"
+#include "gfx/gl/GLBuffer.h"
 
 #include <glm/gtc/type_ptr.hpp>
 

@@ -7,8 +7,8 @@
  */
 
 #include "OrbitAnimation.h"
-#include "enh/ApplicationNodeBase.h"
-#include "core/glfw.h"
+#include "ApplicationNodeBase.h"
+#include <core/glfw.h>
 #include <imgui.h>
 
 #define GLM_ENABLE_EXPERIMENTAL

@@ -22,9 +22,9 @@ set(VISCOM_DO_PROFILING ON CACHE BOOL "Turn on profiling.")
 file(GLOB_RECURSE SHADER_FILES_ENH ${PROJECT_SOURCE_DIR}/resources/shader/*.*)
 list(FILTER SHADER_FILES_ENH EXCLUDE REGEX ".*\.gen$")
 file(GLOB_RECURSE SRC_FILES_ENH
-    src/enh/*.h
-    src/enh/*.cpp
-    src/enh/*.inl)
+    src/*.h
+    src/*.cpp
+    src/*.inl)
 
 foreach(f ${SRC_FILES_ENH})
     file(RELATIVE_PATH SRCGR ${PROJECT_SOURCE_DIR} ${f})
