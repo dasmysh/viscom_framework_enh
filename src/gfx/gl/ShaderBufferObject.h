@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "enh/core/owned_ptr.h"
+#include "core/owned_ptr.h"
 
 #include <string>
 #include <glbinding/gl/gl.h>

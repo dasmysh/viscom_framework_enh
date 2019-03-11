@@ -7,10 +7,10 @@
  */
 
 #include "FilmicTMOperator.h"
-#include "enh/ApplicationNodeBase.h"
-#include "core/gfx/FrameBuffer.h"
-#include "enh/gfx/gl/GLUniformBuffer.h"
-#include "enh/gfx/gl/GLTexture.h"
+#include "ApplicationNodeBase.h"
+#include <core/gfx/FrameBuffer.h>
+#include "gfx/gl/GLUniformBuffer.h"
+#include "gfx/gl/GLTexture.h"
 #include <imgui.h>
 
 namespace viscom::enh {

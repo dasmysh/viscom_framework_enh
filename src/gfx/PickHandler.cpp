@@ -9,8 +9,8 @@
 #define GLM_FORCE_SWIZZLE
 
 #include "PickHandler.h"
-#include "enh/ApplicationNodeBase.h"
-#include "enh/gfx/gl/GLBuffer.h"
+#include "ApplicationNodeBase.h"
+#include "gfx/gl/GLBuffer.h"
 #include "core/glfw.h"
 #include <set>
 #include <glm/gtc/matrix_inverse.hpp>

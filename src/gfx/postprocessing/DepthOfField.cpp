@@ -7,9 +7,9 @@
  */
 
 #include "DepthOfField.h"
-#include "core/gfx/FrameBuffer.h"
-#include "enh/ApplicationNodeBase.h"
-#include "enh/gfx/gl/GLTexture.h"
+#include <core/gfx/FrameBuffer.h>
+#include "ApplicationNodeBase.h"
+#include "gfx/gl/GLTexture.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui.h>
 

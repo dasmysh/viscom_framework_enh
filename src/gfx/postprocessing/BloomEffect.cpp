@@ -7,9 +7,9 @@
  */
 
 #include "BloomEffect.h"
-#include "core/gfx/FrameBuffer.h"
-#include "enh/ApplicationNodeBase.h"
-#include "enh/gfx/gl/GLTexture.h"
+#include <core/gfx/FrameBuffer.h>
+#include "ApplicationNodeBase.h"
+#include "gfx/gl/GLTexture.h"
 #include <imgui.h>
 
 namespace viscom::enh {
