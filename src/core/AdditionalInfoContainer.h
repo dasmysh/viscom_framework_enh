@@ -12,6 +12,7 @@
 #include <any>
 #include <string>
 #include <string_view>
+#include <memory>
 
 namespace mysh::core {
 
