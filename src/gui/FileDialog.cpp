@@ -109,7 +109,14 @@ namespace gui {
             auto lcExtension = fileInfo.extension().string();
             std::transform(lcExtension.begin(), lcExtension.end(), lcExtension.begin(), ::tolower);
 
-            if (!vFilters.empty() && fs::is_regular_file(fileInfo) && lcExtension != vFilters[currentFilterIndex_]) continue;
+            if (!vFilters.empty() && fs::is_regular_file(fileInfo)) {
+                if (currentFilterIndex_ != vFilters.size()) {
+                    if (lcExtension != vFilters[currentFilterIndex_]) continue;
+                }
+                else {
+                    if (std::find(vFilters.begin(), vFilters.end(), lcExtension) == vFilters.end()) continue;
+                }
+            }
             if (directoriesOnly && !fs::is_directory(fileInfo)) continue;
 
             if (ImGui::Selectable(str.c_str(), (fileInfo == selectedFile_))) {
@@ -143,12 +150,13 @@ namespace gui {
         if (!vFilters.empty()) {
             ImGui::SameLine();
             ImGui::PushItemWidth(100.0f);
-            if (ImGui::BeginCombo("##Filters", vFilters[currentFilterIndex_].c_str())) {
+            if (ImGui::BeginCombo("##Filters", currentFilterIndex_ >= vFilters.size() ? "All" : vFilters[currentFilterIndex_].c_str())) {
                 std::size_t currentFilter = 0;
                 for (const auto& filter : vFilters) {
                     if (ImGui::Selectable(filter.c_str(), currentFilter == currentFilterIndex_)) currentFilterIndex_ = currentFilter;
                     ++currentFilter;
                 }
+                if (ImGui::Selectable("All", currentFilter == currentFilterIndex_)) currentFilterIndex_ = currentFilter;
 
                 ImGui::EndCombo();
             }
