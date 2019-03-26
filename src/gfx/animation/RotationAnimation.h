@@ -45,7 +45,7 @@ namespace viscom::enh {
         void SetFrequency(float frequency) { frequency_ = frequency; }
         const glm::quat& GetCurrentState() const { return currentState_; }
 
-        bool DoAnimationStep(float elapsedTime) override;
+        bool DoAnimationStep(float currentTime) override;
         void ShowEditDialog(const std::string& name);
 
     private:

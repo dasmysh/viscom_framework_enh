@@ -16,16 +16,15 @@ namespace viscom::enh {
 
     BaseAnimation::~BaseAnimation() = default;
 
-    void BaseAnimation::StartAnimation()
+    void BaseAnimation::StartAnimation(float currentTime)
     {
         animationRunning_ = true;
-        currentAnimationTime_ = 0.0f;
+        animationStartTime_ = currentTime;
     }
 
-    bool BaseAnimation::DoAnimationStep(float elapsedTime)
+    bool BaseAnimation::DoAnimationStep(float currentTime)
     {
         if (!animationRunning_) return false;
-        currentAnimationTime_ += elapsedTime;
         return true;
     }
 }

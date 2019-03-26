@@ -35,9 +35,9 @@ namespace viscom::enh {
     }
 
     template <class T>
-    void TAnimationManager<T>::StartAnimation()
+    void TAnimationManager<T>::StartAnimation(float currentTime)
     {
-        for (auto& a : animations_) a.StartAnimation();
+        for (auto& a : animations_) a.StartAnimation(currentTime);
     }
 
     template <class T>
@@ -47,10 +47,10 @@ namespace viscom::enh {
     }
 
     template <class T>
-    bool TAnimationManager<T>::DoAnimationStep(float elapsedTime)
+    bool TAnimationManager<T>::DoAnimationStep(float currentTime)
     {
         auto running = false;
-        for (auto& a : animations_) if (a.DoAnimationStep(elapsedTime)) running = true;
+        for (auto& a : animations_) if (a.DoAnimationStep(currentTime)) running = true;
         return running;
     }
 
@@ -214,11 +214,11 @@ namespace viscom::enh {
 
     AnimationManager::~AnimationManager() = default;
 
-    void AnimationManager::StartAnimation()
+    void AnimationManager::StartAnimation(float currentTime)
     {
-        wpAnimations_.StartAnimation();
-        rotAnimations_.StartAnimation();
-        orbAnimations_.StartAnimation();
+        wpAnimations_.StartAnimation(currentTime);
+        rotAnimations_.StartAnimation(currentTime);
+        orbAnimations_.StartAnimation(currentTime);
     }
 
     void AnimationManager::StopAnimation()
@@ -228,12 +228,12 @@ namespace viscom::enh {
         orbAnimations_.StopAnimation();
     }
 
-    bool AnimationManager::DoAnimationStep(float elapsedTime)
+    bool AnimationManager::DoAnimationStep(float currentTime)
     {
         auto running = false;
-        if (wpAnimations_.DoAnimationStep(elapsedTime)) running = true;
-        if (rotAnimations_.DoAnimationStep(elapsedTime)) running = true;
-        if (orbAnimations_.DoAnimationStep(elapsedTime)) running = true;
+        if (wpAnimations_.DoAnimationStep(currentTime)) running = true;
+        if (rotAnimations_.DoAnimationStep(currentTime)) running = true;
+        if (orbAnimations_.DoAnimationStep(currentTime)) running = true;
         return running;
     }
 

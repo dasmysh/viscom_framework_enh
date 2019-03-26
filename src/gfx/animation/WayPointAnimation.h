@@ -55,8 +55,8 @@ namespace viscom::enh {
         void SetNormalizeTime(bool normalizeTime) { normalizeTime_ = normalizeTime; }
         const WayPointInfo& GetCurrentState() const { return currentState_; }
 
-        void StartAnimation() override;
-        bool DoAnimationStep(float elapsedTime) override;
+        void StartAnimation(float currentTime) override;
+        bool DoAnimationStep(float currentTime) override;
         void ShowEditDialog(const std::string& name);
 
     private:

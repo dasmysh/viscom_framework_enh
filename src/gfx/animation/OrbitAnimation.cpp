@@ -33,14 +33,14 @@ namespace viscom::enh {
 
     OrbitAnimation::~OrbitAnimation() = default;
 
-    bool OrbitAnimation::DoAnimationStep(float elapsedTime)
+    bool OrbitAnimation::DoAnimationStep(float currentTime)
     {
-        if (!BaseAnimation::DoAnimationStep(elapsedTime)) return false;
+        if (!BaseAnimation::DoAnimationStep(currentTime)) return false;
         if (frequency_ < 0.00001f) {
             StopAnimation();
             return false;
         }
-        currentState_ = glm::rotate(startPosition_, glm::two_pi<float>() * (GetCurrentTime() / frequency_), rotationAxis_);
+        currentState_ = glm::rotate(startPosition_, glm::two_pi<float>() * (GetCurrentAnimationTime(currentTime) / frequency_), rotationAxis_);
         return true;
     }
 

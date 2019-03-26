@@ -41,9 +41,9 @@ namespace viscom::enh {
         int GetCurrentId() const { return currentAnimation_; }
         typename T::Editor& GetEditor() { return editor_; }
 
-        void StartAnimation();
+        void StartAnimation(float currentTime);
         void StopAnimation();
-        bool DoAnimationStep(float elapsedTime);
+        bool DoAnimationStep(float currentTime);
 
         // void ShowAnimationMenu(const std::string& name);
         void ShowAnimationMenu(const std::string& name, bool showMenu, bool showEdit);
@@ -91,9 +91,9 @@ namespace viscom::enh {
         explicit AnimationManager(const std::string& dir, const CameraHelper* camera);
         ~AnimationManager();
 
-        void StartAnimation();
+        void StartAnimation(float currentTime);
         void StopAnimation();
-        bool DoAnimationStep(float elapsedTime);
+        bool DoAnimationStep(float currentTime);
 
         void ShowAnimationMenu(const std::string& name, bool showMenu);
         void LoadAnimations(const std::string& fileName);

@@ -32,7 +32,7 @@ namespace viscom::enh {
 
     void WayPointAnimation::AddWaypoint(const WayPointInfo& wp)
     {
-        wayPoints_.push_back(std::make_pair(wp, 0.0f));
+        wayPoints_.emplace_back(wp, 0.0f);
     }
 
     void WayPointAnimation::ResetWaypoints()
@@ -40,9 +40,9 @@ namespace viscom::enh {
         wayPoints_.clear();
     }
 
-    void WayPointAnimation::StartAnimation()
+    void WayPointAnimation::StartAnimation(float currentTime)
     {
-        BaseAnimation::StartAnimation();
+        BaseAnimation::StartAnimation(currentTime);
         if (wayPoints_.size() < 2) {
             StopAnimation();
             return;
@@ -63,22 +63,22 @@ namespace viscom::enh {
         for (std::size_t i = 1; i < distances.size(); ++i) wayPoints_[i].second = wayPoints_[i - 1].second + distances[i];
     }
 
-    bool WayPointAnimation::DoAnimationStep(float elapsedTime)
+    bool WayPointAnimation::DoAnimationStep(float currentTime)
     {
-        if (!BaseAnimation::DoAnimationStep(elapsedTime)) return false;
+        if (!BaseAnimation::DoAnimationStep(currentTime)) return false;
         if (totalTime_ < 0.00001f) {
             StopAnimation();
             return false;
         }
 
         std::size_t cI = 1;
-        for (; cI < wayPoints_.size(); ++cI) if (wayPoints_[cI].second > GetCurrentTime()) break;
+        for (; cI < wayPoints_.size(); ++cI) if (wayPoints_[cI].second > GetCurrentAnimationTime(currentTime)) break;
 
         if (cI >= wayPoints_.size()) {
             cI = wayPoints_.size() - 1;
             StopAnimation();
         }
-        auto alpha = (GetCurrentTime() - wayPoints_[cI - 1].second) / (wayPoints_[cI].second - wayPoints_[cI - 1].second);
+        auto alpha = (GetCurrentAnimationTime(currentTime) - wayPoints_[cI - 1].second) / (wayPoints_[cI].second - wayPoints_[cI - 1].second);
         auto& wpCI = wayPoints_[cI].first;
         auto& wpCIn1 = wayPoints_[cI - 1].first;
         switch (interpolationMode_) {
@@ -105,7 +105,7 @@ namespace viscom::enh {
         }
 
 
-        if (GetCurrentTime() > wayPoints_.back().second) StopAnimation();
+        if (GetCurrentAnimationTime(currentTime) > wayPoints_.back().second) StopAnimation();
         return true;
     }
 

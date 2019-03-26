@@ -19,14 +19,15 @@ namespace viscom::enh {
         BaseAnimation();
         virtual ~BaseAnimation();
 
-        virtual void StartAnimation();
+        virtual void StartAnimation(float currentTime);
         void StopAnimation() { animationRunning_ = false; }
-        virtual bool DoAnimationStep(float elapsedTime);
+        virtual bool DoAnimationStep(float currentTime);
 
         bool IsAnimationRunning() const { return animationRunning_; }
 
     protected:
-        float GetCurrentTime() const { return currentAnimationTime_; }
+        float GetAnimationStartTime() const { return animationStartTime_; }
+        float GetCurrentAnimationTime(float currentTime) const { return currentTime - animationStartTime_; }
 
     private:
         /** Needed for serialization */
@@ -40,13 +41,13 @@ namespace viscom::enh {
         {
             // we do not serialize this as it is a running state.
             animationRunning_ = false;
-            currentAnimationTime_ = 0.0f;
+            animationStartTime_ = 0.0f;
         }
 
         /** Hold whether the animation is running. */
         bool animationRunning_ = false;
         /** Holds the current animation time. */
-        float currentAnimationTime_ = 0.0f;
+        float animationStartTime_ = 0.0f;
     };
 }
 
