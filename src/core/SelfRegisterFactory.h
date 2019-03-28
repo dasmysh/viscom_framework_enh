@@ -32,35 +32,35 @@ namespace mysh::core {
 
     public:
         SelfRegisterFactory() = delete;
-        static void Initialize(const std::function<viscom::ApplicationNodeImplementation*()>& appNodeGetter) { s_appNodeGetter = appNodeGetter; }
-        static viscom::ApplicationNodeImplementation* GetAppNode() { return s_appNodeGetter(); }
+        static void Initialize(const std::function<viscom::ApplicationNodeImplementation*()>& appNodeGetter) { s_appNodeGetter() = appNodeGetter; }
+        static viscom::ApplicationNodeImplementation* GetAppNode() { return s_appNodeGetter()(); }
 
         static bool Register(const std::string_view name, TCreateMethod funcCreate, int prio = 0)
         {
             bool inserted = false;
 #pragma warning(push)
 #pragma warning(disable : 4834)
-            if (auto it = std::find_if(std::execution::seq, s_methods.begin(), s_methods.end(),
+            if (auto it = std::find_if(std::execution::seq, s_methods().begin(), s_methods().end(),
                     [&](const auto& e) { return std::get<1>(e) == name; });
-                    it == s_methods.end()) {
-                s_methods.emplace_back(prio, name, funcCreate);
+                    it == s_methods().end()) {
+                s_methods().emplace_back(prio, name, funcCreate);
                 inserted = true;
             }
 #pragma warning(pop)
-            std::sort(s_methods.begin(), s_methods.end(), [](const auto& a, const auto& b) {
+            std::sort(s_methods().begin(), s_methods().end(), [](const auto& a, const auto& b) {
                 if (std::get<0>(a) == std::get<0>(b)) return std::get<1>(a) < std::get<1>(b);
                 return std::get<0>(a) < std::get<0>(b);
             });
             return inserted;
         }
 
-        static std::size_t GetNumRegistered() { return s_methods.size(); }
+        static std::size_t GetNumRegistered() { return s_methods().size(); }
 
         static std::unique_ptr<T> Create(const std::string_view& name)
         {
-            if (auto it = std::find_if(std::execution::seq, s_methods.begin(), s_methods.end(),
+            if (auto it = std::find_if(std::execution::seq, s_methods().begin(), s_methods().end(),
                     [&](const auto& e) { return std::get<1>(e) == name; });
-                    it != s_methods.end()) {
+                    it != s_methods().end()) {
                 return std::get<2>(*it)();
             }
             return nullptr;
@@ -68,13 +68,19 @@ namespace mysh::core {
 
         static std::unique_ptr<T> Create(std::size_t index)
         {
-            if (index < s_methods.size()) return std::get<2>(s_methods[index])();
+            if (index < s_methods().size()) return std::get<2>(s_methods()[index])();
             return nullptr;
         }
 
-    private:
-        static TMethodList s_methods;
-        static TAppGetter s_appNodeGetter;
+        static TMethodList& s_methods() {
+            static TMethodList s_methods_;
+            return s_methods_;
+        }
+
+        static TAppGetter& s_appNodeGetter() {
+            static TAppGetter s_appNodeGetter_;
+            return s_appNodeGetter_;
+        }
     };
 }
 
@@ -88,7 +94,3 @@ bool c::s_registered = mysh::core::SelfRegisterFactory<b>::Register( \
 
 #define REGISTER_CLASS_APP(b, c) REGISTER_CLASS_PRIO_APP(b, c, 0)
 #define REGISTER_CLASS(b, c) REGISTER_CLASS_PRIO(b, c, 0)
-
-#define DEFINE_SELFREGISTERFACTORY(b) \
-SelfRegisterFactory<b>::TMethodList SelfRegisterFactory<b>::s_methods; \
-SelfRegisterFactory<b>::TAppGetter SelfRegisterFactory<b>::s_appNodeGetter
