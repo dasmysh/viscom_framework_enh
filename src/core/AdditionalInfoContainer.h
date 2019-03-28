@@ -22,7 +22,11 @@ namespace mysh::core {
         void SetAnyAdditionalInfo(const std::string_view& renderer, const std::any& info);
         template<class T> void SetAdditionalInfo(const std::string_view& renderer, std::shared_ptr<T>&& info) { SetAnyAdditionalInfo(renderer, std::any{ info }); }
         template<class T> const T* GetAdditionalInfo(const std::string_view& renderer) const { return std::any_cast<std::shared_ptr<T>>(additionalMeshInfo_.find(renderer)->second).get(); }
-        template<class T> T* GetAdditionalInfo(const std::string_view& renderer) { return std::any_cast<std::shared_ptr<T>>(additionalMeshInfo_.find(renderer)->second).get(); }
+        template<class T> T* GetAdditionalInfo(const std::string_view& renderer) {
+            auto content = additionalMeshInfo_.find(renderer);
+            if (content == additionalMeshInfo_.end() || !content->second.has_value()) return nullptr;
+            return std::any_cast<std::shared_ptr<T>>(content->second).get();
+        }
 
     private:
         /** Contains additional information of a mesh based on the renderer. */
