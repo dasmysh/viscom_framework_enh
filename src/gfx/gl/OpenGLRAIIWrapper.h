@@ -143,6 +143,20 @@ namespace viscom::enh {
         }
     };
 
+    struct SamplerObjectTraits
+    {
+        using value_type = gl::GLuint;
+        static const value_type null_obj = 0;
+        static value_type Create() { value_type sampler; gl::glGenSamplers(1, &sampler); return sampler; }
+        template<int N> static void Create(std::array<value_type, N>& samplers) { gl::glGenSamplers(static_cast<gl::GLsizei>(N), samplers.data()); }
+        static value_type Destroy(value_type sampler) { gl::glDeleteSamplers(1, &sampler); return null_obj; }
+        template<int N> static void Destroy(std::array<value_type, N>& samplers)
+        {
+            gl::glDeleteVertexArrays(static_cast<gl::GLsizei>(N), samplers.data());
+            for (auto& sampler : samplers) sampler = null_obj;
+        }
+    };
+
     using ProgramRAII = OpenGLRAIIWrapper<ProgramObjectTraits, 1>;
     using ShaderRAII = OpenGLRAIIWrapper<ShaderObjectTraits, 1>;
     template<int N> using BuffersRAII = OpenGLRAIIWrapper<BufferObjectTraits, N>;
@@ -155,5 +169,8 @@ namespace viscom::enh {
     using RenderbufferRAII = OpenGLRAIIWrapper<RenderbufferObjectTraits, 1>;
     template<int N> using VertexArraysRAII = OpenGLRAIIWrapper<VertexArrayObjectTraits, N>;
     using VertexArrayRAII = OpenGLRAIIWrapper<VertexArrayObjectTraits, 1>;
+
+    template<int N> using SamplersRAII = OpenGLRAIIWrapper<SamplerObjectTraits, N>;
+    using SamplerRAII = OpenGLRAIIWrapper<SamplerObjectTraits, 1>;
 }
 
