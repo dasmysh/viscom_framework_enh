@@ -8,7 +8,7 @@
 
 #include "serialization_helper.h"
 #ifndef __APPLE_CC__
-#include <experimental/filesystem>
+#include <filesystem>
 #endif
 #include <g3log/g3log.hpp>
 
@@ -19,7 +19,7 @@ namespace viscom::enh {
     {
 #ifndef __APPLE_CC__
         if (IsValid()) {
-            auto lastModTime = std::experimental::filesystem::last_write_time(filename);
+            auto lastModTime = std::filesystem::last_write_time(filename);
             auto timestamp = std::chrono::duration_cast<std::chrono::seconds>(lastModTime.time_since_epoch()).count();
             decltype(timestamp) binTimestamp;
             (*this)(cereal::make_nvp("timestamp", binTimestamp));
@@ -41,7 +41,7 @@ namespace viscom::enh {
         ArchiveWrapper{ filename }
     {
 #ifndef __APPLE_CC__
-        auto lastModTime = std::experimental::filesystem::last_write_time(filename);
+        auto lastModTime = std::filesystem::last_write_time(filename);
         auto timestamp = std::chrono::duration_cast<std::chrono::seconds>(lastModTime.time_since_epoch()).count();
         (*this)(cereal::make_nvp("timestamp", timestamp));
 #endif

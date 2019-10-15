@@ -35,6 +35,11 @@ namespace gui {
         return ShowFileDialog(vName, false, false, vFilters, path, vDefaultFileName);
     }
 
+    bool FileDialog::ShowOpenDirectoryDialog(std::string_view vName, const std::filesystem::path& path)
+    {
+        return ShowFileDialog(vName, true, true, {}, path, "");
+    }
+
     bool FileDialog::ShowNewDirectoryDialog(std::string_view vName, std::string_view vDefaultFileName, const std::filesystem::path& path)
     {
         return ShowFileDialog(vName, false, true, {}, path, vDefaultFileName);

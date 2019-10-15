@@ -22,6 +22,7 @@ namespace gui {
 
         bool ShowOpenFileDialog(std::string_view vName, const std::vector<std::string>& vFilters = {}, const std::filesystem::path& path = std::filesystem::path());
         bool ShowSaveFileDialog(std::string_view vName, const std::vector<std::string>& vFilters = {}, std::string_view vDefaultFileName = std::string_view(), const std::filesystem::path& path = std::filesystem::path());
+        bool ShowOpenDirectoryDialog(std::string_view vName, const std::filesystem::path& path = std::filesystem::path());
         bool ShowNewDirectoryDialog(std::string_view vName, std::string_view vDefaultFileName = std::string_view(), const std::filesystem::path& path = std::filesystem::path());
 
         const std::filesystem::path& GetResult() const { return selectedFile_; }
