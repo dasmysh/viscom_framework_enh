@@ -184,19 +184,19 @@ namespace viscom::enh {
         case gl::GL_RGB: channelsNeeded = 3; break;
         case gl::GL_RGBA: channelsNeeded = 4; break; //-V112
         default:
-            LOG(FATAL) << "Unknown texture format (" << descriptor_.format_ << ").";
+            spdlog::critical("Unknown texture format ({}).", descriptor_.format_);
             throw std::runtime_error("Unknown texture format.");
         }
 
         auto imgWidth = 0, imgHeight = 0, imgChannels = 0;
         auto image = stbi_load(file.c_str(), &imgWidth, &imgHeight, &imgChannels, channelsNeeded);
         if (!image) {
-            LOG(FATAL) << R"(Could not load texture ")" << file.c_str() << R"(".)";
+            spdlog::critical("Could not load texture {}.", file.c_str());
             throw std::runtime_error(R"(Could not load texture ")" + file + R"(".)");
         }
 
         if (width_ != static_cast<unsigned int>(imgWidth) || height_ != static_cast<unsigned int>(imgHeight)) {
-            LOG(FATAL) << R"(Texture ")" << file.c_str() << R"(" has the wrong format!)";
+            spdlog::critical("Texture {} has the wrong format!", file.c_str());
             stbi_image_free(image);
             throw std::runtime_error(R"(Texture ")" + file + R"(" has the wrong format.)");
         }
@@ -229,7 +229,7 @@ namespace viscom::enh {
             break;
         default:
             throw std::runtime_error("Texture format not supported for upload.");
-        }        
+        }
         gl::glBindTexture(id_.textureType, 0);
     }
 
@@ -276,7 +276,7 @@ namespace viscom::enh {
         else if (descriptor.format_ == gl::GL_RGB) comp = 3;
         else if (descriptor.format_ == gl::GL_RGBA) comp = 4; //-V112
         else {
-            LOG(WARNING) << "Texture format not supported for downloading.";
+            spdlog::warn("Texture format not supported for downloading.");
             return;
         }
 
@@ -317,7 +317,7 @@ namespace viscom::enh {
         else if (descriptor.format_ == gl::GL_RGB) comp = 3;
         else if (descriptor.format_ == gl::GL_RGBA) comp = 4; //-V112
         else {
-            LOG(WARNING) << "Texture format not supported for saving.";
+            spdlog::warn("Texture format not supported for saving.");
             return;
         }
         std::vector<std::uint8_t> screenData;

@@ -29,13 +29,13 @@ void ecb(const glbinding::FunctionCall & call) {
         callOut << " -> " << call.returnValue->asString();
         //callOut << " -> " << call.returnValue.get();
 
-    LOG(DBUG) << callOut.str();
+    spdlog::debug("{}", callOut.str());
 
     const auto error = gl::glGetError();
 
     if (gl::GL_NO_ERROR != error) {
         // LOG(WARNING) << "Error: " << glbinding::aux::Meta::getString(error);
-        LOG(WARNING) << "Error: " << glbinding::Meta::getString(error);
+        spdlog::warn("Error: {}", glbinding::Meta::getString(error));
     }
 }
 

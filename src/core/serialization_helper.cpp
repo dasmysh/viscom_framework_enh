@@ -10,7 +10,7 @@
 #ifndef __APPLE_CC__
 #include <filesystem>
 #endif
-#include <g3log/g3log.hpp>
+#include <spdlog/spdlog.h>
 
 namespace viscom::enh {
 
@@ -24,15 +24,11 @@ namespace viscom::enh {
             decltype(timestamp) binTimestamp;
             (*this)(cereal::make_nvp("timestamp", binTimestamp));
             if (binTimestamp < timestamp) {
-                LOG(WARNING) << "Will not load binary file. Falling back to original." << std::endl
-                    << "Filename: " << GetBinFilename(filename) << std::endl
-                    << "Description: Timestamp older than original file.";
+                spdlog::warn("Will not load binary file. Falling back to original.\nFilename: {}\nDescription: Timestamp older than original file.", GetBinFilename(filename));
                 Close();
             }
         } else {
-            LOG(WARNING) << "Will not load binary file. Falling back to original." << std::endl
-                << "Filename: " << GetBinFilename(filename) << std::endl
-                << "Description: File does not exist.";
+            spdlog::warn("Will not load binary file. Falling back to original.\nFilename: {}\nDescription: File does not exist.", GetBinFilename(filename));
         }
 #endif
     }
